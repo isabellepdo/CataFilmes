@@ -1,3 +1,87 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '@angular/material/prebuilt-themes/indigo-pink.css';  
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/*MENU*/
+.navbar-brand {
+  font-size: 1.8rem;
+}
+
+.nav-link{
+  font-size: 1.2rem;
+}
+
+
+/*BACKGROUND*/
+.bodysite{
+  background-color:rgba(52,58,62,0.8);
+}
+
+.divbackground{
+  background-size: auto;
+  background-image: url("/assets/wallpaper2.jpg");
+  background-repeat: no-repeat;
+  padding-top: 20rem;
+  padding-bottom: 20rem;
+  color: goldenrod;
+  font-size: x-large;
+  text-shadow: -1px 0 black, 0 1px black,
+      1px 0 black, 0 -1px black
+}
+
+.textointro{
+  text-align: center;
+  align-items: center;
+  margin-top: -2rem;
+  margin-bottom: -10rem;
+
+}
+
+.textointro form{
+  padding: 0.5rem;
+  size: 18px;
+}
+
+.corpo{
+  margin-top: -15rem;
+  background-color: rgba(175,139,16, 0.95);
+  height: 900px;
+}
+
+/*corpo do site*/
+
+/*BUSCA*/
+.corpo{
+  padding-top: 4rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.form-control-borderless {
+  border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+/*BUSCA*/
+.resultadobusca{
+  margin-top: 2rem;
+  align-items: center !important;
+}
+
+/*FOOTER*/
+
+.rodape{
+  height: 4rem;
+  background-color: rgba(52,58,62,1);
+  padding: 1.5rem;
+  color: #fff;
+}
+
+.rodape i{
+  font-size: 32px;
+}
