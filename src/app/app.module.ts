@@ -22,6 +22,7 @@ import { MatNativeDateModule } from "@angular/material/core";
 
 import { MatRadioModule } from '@angular/material/radio';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatToolbarModule,
     AppRoutingModule
   ],
-  providers: [HttpClientModule, CatalogoService,MatDatepickerModule],
+  providers: [HttpClientModule, CatalogoService,MatDatepickerModule, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
