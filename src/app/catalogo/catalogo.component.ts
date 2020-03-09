@@ -1,6 +1,7 @@
 import { environment } from "./../../environments/environment";
 import { Component, OnInit, Injector } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: "app-catalogo",
@@ -13,9 +14,10 @@ export class CatalogoComponent implements OnInit {
   resMovies: Array<any> = [];
 
 
-  constructor(protected injector: Injector, protected http: HttpClient) {
+  constructor(protected injector: Injector, protected http: HttpClient, public datepipe: DatePipe) {
     this.http = injector.get(HttpClient);
   }
+
 
   ngOnInit(): void {
     this.getMovies();
