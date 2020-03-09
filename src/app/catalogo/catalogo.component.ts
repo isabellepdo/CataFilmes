@@ -1,40 +1,36 @@
-
-import { environment } from './../../environments/environment';
-import { Observable } from 'rxjs';
-import { Component, OnInit, Injector } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { environment } from "./../../environments/environment";
+import { Component, OnInit, Injector } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Component({
-  selector: 'app-catalogo',
-  templateUrl: './catalogo.component.html',
-  styleUrls: ['./catalogo.component.css']
+  selector: "app-catalogo",
+  templateUrl: "./catalogo.component.html",
+  styleUrls: ["./catalogo.component.css"]
 })
 export class CatalogoComponent implements OnInit {
-
-  protected http: HttpClient;
   protected headers: HttpHeaders;
 
-  resMovies:any;
+  resMovies: Array<any> = [];
 
-  constructor(
-    protected injector: Injector
-  ) {
+  constructor(protected injector: Injector, protected http: HttpClient) {
     this.http = injector.get(HttpClient);
   }
 
   ngOnInit(): void {
-    this.resMovies = this.getMovies();
-    console.log(this.resMovies);
+    this.getMovies();
   }
 
-  getMovies(): Observable<any> {
-    return this.http.get(environment.apiURL).pipe(
-    )
+  getMovies() {
+    this.http
+      .get(environment.apiBaseURL + "top_rated" + environment.apiKey)
+      .subscribe(
+        res => {
+          this.resMovies = res as any;
+          console.log(this.resMovies);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
-
-  handleError(handleError: any): any {
-    throw new Error("Method not implemented.");
-  }
-
 }
