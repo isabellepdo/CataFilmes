@@ -12,12 +12,14 @@ export class CatalogoComponent implements OnInit {
 
   resMovies: Array<any> = [];
 
+
   constructor(protected injector: Injector, protected http: HttpClient) {
     this.http = injector.get(HttpClient);
   }
 
   ngOnInit(): void {
     this.getMovies();
+
   }
 
   getMovies() {

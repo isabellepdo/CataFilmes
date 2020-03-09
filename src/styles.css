@@ -89,6 +89,18 @@
       1px 0 black, 0 -1px black
 }
 
+.resultadopopulares{
+  margin-top: 1rem;
+  align-items: center !important;
+  text-align: center;
+  align-content: center;
+}
+
+.cardpopulares{
+  width: 25rem;
+  margin-bottom: 1.2rem;
+}
+
 /*FOOTER*/
 
 .rodape{
@@ -100,6 +112,42 @@
 
 .rodape i{
   font-size: 32px;
+}
+
+/* RESOLUÇÃO CELULAR */
+@media (max-width: 700px) {
+
+/*POPULARES*/
+
+
+.resultadopopulares{
+  margin-top: 0.2rem;
+}
+
+.cardpopulares{
+  width: 20rem;
+  margin-bottom: 0.8rem;
+}
+
+/*FOOTER*/
+
+.rodape{
+  height: 10rem;
+  background-color: rgba(52,58,62,1);
+  padding: 1.5rem;
+  color: #fff;
+}
+
+.rodape a{
+  font-size: 28px;
+  text-align: end !important;
+}
+
+.redessociais{
+  text-align: center;
+  align-items: center;
+}
+
 }
 
 
