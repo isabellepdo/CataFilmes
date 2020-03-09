@@ -1,1 +1,65 @@
-<p>catalogo works!</p>
+<div class="container corpo" id="buscafilme">
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <!--BARRA DE PESQUISA-->
+      <form class="card card-sm" >
+            <div class="card-body row no-gutters align-items-center">
+                <div class="col-auto">
+                    <i class="fas fa-search h4 text-body"></i>
+                </div>
+                <div class="col">
+                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Use palavras chaves para buscar filmes">
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-lg btn-secondary" type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
+        <!--ESCOLHA DE GENERO-->
+        <div class="form-group" style="margin-top: 1rem;">
+          <label for="exampleFormControlSelect1" style="color: #fff;">Gênero do Filme</label>
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option>--TODOS--</option>
+            <option>Ação</option>
+            <option>Animação</option>
+            <option>Aventura</option>
+            <option>Comédia</option>
+            <option>Dança</option>
+            <option>Documentário</option>
+            <option>Drama</option>
+            <option>Espionagem</option>
+            <option>Faroeste</option>
+            <option>Fantasia</option>
+            <option>Ficção Científica</option>
+            <option>Filmes de Guerra</option>
+            <option>Musical</option>
+            <option>Policial</option>
+            <option>Romance</option>
+            <option>Suspense</option>
+            <option>Terror</option>
+          </select>
+          <label for="exampleFormControlSelect1" style="color: #fff;">Ano do Filme</label>
+          <input type="number" class="form-control" placeholder="2000">
+        </div>
+      </div>
+    </div>
+
+    <!--AREA DOS CARDS-->
+    <div class="row resultadobusca">
+      <div class="col col-sm-4 col-md-4 col-lg-4">
+        <div class="card" style="width: 18rem;">
+          <img src="/assets/movie.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Nome do Filme</h5>
+            <h6 class="card-text">(ano)</h6>
+            <p class="card-text">Sinopse do Filme</p>
+            <a href="#" class="btn btn-warning btn-lg btn-block">Ler Mais</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<p>
+  {{resMovies}}
+</p>
