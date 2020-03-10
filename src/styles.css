@@ -3,6 +3,7 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 /*MENU*/
+
 .navbar-brand {
   font-size: 1.8rem;
 }
@@ -10,6 +11,9 @@
 .nav-link{
   font-size: 1.2rem;
 }
+
+
+
 
 
 /*BACKGROUND*/
@@ -54,6 +58,10 @@
 
 }
 
+.pesquisa{
+  margin-top: 2rem;
+}
+
 /*BUSCA*/
 .form-control-borderless {
   border: none;
@@ -84,6 +92,7 @@
 
 /*POPULARES*/
 
+
 .populares{
   height: auto;
   background-color: rgba(255, 255, 255, 0.5);
@@ -92,6 +101,7 @@
 
 .populares h1{
   font-size: 40px;
+  margin-top: 2rem;
   color: goldenrod;
   text-align: center;
   text-shadow: -1px 0 black, 0 1px black,
@@ -135,6 +145,16 @@
 
 .rodape i{
   font-size: 32px;
+}
+
+/*MODAL DETALHES*/
+.avaliacoes{
+  background-color: rgba(175,139,16, 0.95);
+  text-align: center;
+  color: #FFF;
+  padding: 1rem;
+  margin: 1rem;
+  font-size: 18px;
 }
 
 /* RESOLUÇÃO CELULAR */

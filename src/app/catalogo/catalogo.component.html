@@ -3,7 +3,7 @@
   <div class="row justify-content-center">
     <div [formGroup]="filterForm" class="col-12 col-md-10 col-lg-8">
       <!--BARRA DE PESQUISA-->
-      <div class="card card-sm">
+      <div class="card card-sm pesquisa">
         <div class="card-body row no-gutters align-items-center">
           <div class="col-auto">
             <i class="fas fa-search h4 text-body"></i>
@@ -127,22 +127,45 @@
           <img src="https://image.tmdb.org/t/p/w500{{resDetalhes['poster_path']}}" class="card-img-top" alt="...">
         </div>
         <div class="col col-sm-7 col-md-7 col-lg-7">
+
           <h4>Titulo Original: {{resDetalhes["original_title"]}} </h4>
           <h5>Data de Lançamento: {{resDetalhes['release_date']|date:'dd/MM/yyyy'}}</h5>
           <h5>Gêneros: {{resDetalhes['genre_ids']}}</h5>
+
+
+          <h5>Sinopse:</h5>
           <p>{{resDetalhes['overview']}}</p>
-          <h6>Elenco: </h6>
-          <h6>Direção: {{resDetalhes['genre_ids']}}</h6>
-          <h6>Avaliação no The Movie BD</h6>
+
+
+
+        </div>
+
+        <!--DETALHES TECNICOS-->
+        <div class="container" style="padding: 1rem;">
+          <h6>Elenco:</h6>
+          <div class="row container" >
+            <div *ngFor="let movie of resDetalhes['elenco']">
+              {{movie['name']}},
+            </div>
+          </div>
+        <h6 style="margin-top: 1rem;" >Equipe técnica:</h6>
+          <div class="row container" >
+            <div *ngFor="let movie of resDetalhes['equipeTecnica']">
+              {{movie['name']}},
+            </div>
+        </div>
+
+        <div class="avaliacoes">
+          <h5><b>Avaliação no The Movie DB</b></h5>
           <div class="row">
             <div class="col col-sm-4 col-md-4 col-lg-4">
-              <p>Popularidade</p>
+              <p><b>Popularidade</b></p>
             </div>
             <div class="col col-sm-4 col-md-4 col-lg-4">
-              <p>Nota</p>
+              <p><b>Nota</b></p>
             </div>
             <div class="col col-sm-4 col-md-4 col-lg-4">
-              <p>Total de votos</p>
+              <p><b>Total de votos</b></p>
             </div>
           </div>
           <div class="row">
@@ -157,8 +180,14 @@
             </div>
           </div>
         </div>
+
       </div>
+
+
+
     </div>
+
+
 
     <div class="modal-footer">
       <button type="button" class="btn btn-warning" data-dismiss="modal">Fechar</button>

@@ -109,7 +109,19 @@ export class CatalogoComponent implements OnInit {
     .subscribe(
       res => {
         this.resDetalhes = res as any;
-
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    this.http
+    .get(environment.apiBaseURL + "movie/" + id_movie +"/credits"+environment.apiKey)
+    .subscribe(
+      res => {
+        const cast = res as any;
+        this.resDetalhes['elenco']=cast['cast']
+        this.resDetalhes['equipeTecnica']=cast['crew']
+        console.log(this.resDetalhes)
       },
       error => {
         console.log(error);
