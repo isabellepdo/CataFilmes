@@ -1,88 +1,88 @@
 <div class="container corpo" id="buscafilme">
 
   <div class="row justify-content-center">
-    <div class="col-12 col-md-10 col-lg-8">
+    <div [formGroup]="filterForm" class="col-12 col-md-10 col-lg-8">
       <!--BARRA DE PESQUISA-->
-      <form class="card card-sm" >
-            <div class="card-body row no-gutters align-items-center">
-                <div class="col-auto">
-                    <i class="fas fa-search h4 text-body"></i>
-                </div>
-                <div class="col">
-                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Use palavras chaves para buscar filmes">
-                </div>
-                <div class="col-auto">
-                    <button class="btn btn-lg btn-secondary" type="submit">Buscar</button>
-                </div>
-            </div>
-        </form>
-        <!--ESCOLHA DE GENERO-->
-        <div class="form-row" style="margin-top: 1rem;">
-          <div class="form-group col-6 col-md-6">
-            <label for="exampleFormControlSelect1" style="color: #fff;">Gênero do Filme</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>--TODOS--</option>
-              <option>Ação</option>
-              <option>Animação</option>
-              <option>Aventura</option>
-              <option>Comédia</option>
-              <option>Dança</option>
-              <option>Documentário</option>
-              <option>Drama</option>
-              <option>Espionagem</option>
-              <option>Faroeste</option>
-              <option>Fantasia</option>
-              <option>Ficção Científica</option>
-              <option>Filmes de Guerra</option>
-              <option>Musical</option>
-              <option>Policial</option>
-              <option>Romance</option>
-              <option>Suspense</option>
-              <option>Terror</option>
-            </select>
+      <div class="card card-sm">
+        <div class="card-body row no-gutters align-items-center">
+          <div class="col-auto">
+            <i class="fas fa-search h4 text-body"></i>
           </div>
-
-          <div class="form-group col-6 col-md-6">
-            <label for="exampleFormControlSelect1" style="color: #fff;">Ano do Filme</label>
-            <input type="number" min="1895" max="2020" class="form-control" placeholder="Ex. 2000">
+          <div class="col">
+            <input class="form-control form-control-lg form-control-borderless" formControlName="descricao" type="search"
+              placeholder="Use palavras chaves para buscar filmes">
           </div>
-
-
-         </div>
-
-      </div>
-    </div>
-
-    <!--AREA DOS CARDS BUSCA-->
-    <div class="row resultadobusca">
-      <div class="col col-sm-4 col-md-4 col-lg-4">
-        <div class="card" style="width: 18rem;">
-          <img src="/assets/movie.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h4 class="card-title">Nome do Filme</h4>
-            <h5 class="card-text">(ano)</h5>
-            <h6  class="card-text">Gênero: </h6>
-            <p class="card-text">Sinopse do Filme</p>
-            <a href="#" class="btn btn-warning btn-lg btn-block">Ler Mais</a>
+          <div class="col-auto">
+            <button class="btn btn-lg btn-secondary" type="submit" (click)="buscarFilmes()">Buscar</button>
           </div>
         </div>
       </div>
-    </div>
+      <!--ESCOLHA DE GENERO-->
+      <div class="form-row" style="margin-top: 1rem;">
+        <div class="form-group col-6 col-md-6">
+          <label for="exampleFormControlSelect1" style="color: #fff;">Gênero do Filme</label>
+          <select class="form-control" id="exampleFormControlSelect1" formControlName="id" >
+            <option>--TODOS--</option>
+            <option>Ação</option>
+            <option>Animação</option>
+            <option>Aventura</option>
+            <option>Comédia</option>
+            <option>Dança</option>
+            <option>Documentário</option>
+            <option>Drama</option>
+            <option>Espionagem</option>
+            <option>Faroeste</option>
+            <option>Fantasia</option>
+            <option>Ficção Científica</option>
+            <option>Filmes de Guerra</option>
+            <option>Musical</option>
+            <option>Policial</option>
+            <option>Romance</option>
+            <option>Suspense</option>
+            <option>Terror</option>
+          </select>
+        </div>
 
-    <!--PAGINAÇÃO-->
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      </ul>
-    </nav>
+        <div class="form-group col-6 col-md-6">
+          <label for="exampleFormControlSelect1" style="color: #fff;">Ano do Filme</label>
+          <input type="number" min="1895" max="2020" class="form-control" formControlName="ano" placeholder="Ex. 2000">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--{{filterForm.value|json}}-->
+  <!--AREA DOS CARDS BUSCA-->
+  <div class="row resultadobusca">
+    <div class="cardbusca col col-sm-4 col-md-4 col-lg-4" *ngFor="let movie of resMovies['results']">
+      <div class="card" style="width: 22rem;">
+        <h4 class="card-title" id="ptitulo">{{movie['title']}}</h4>
+        <img src="https://image.tmdb.org/t/p/w500{{movie['backdrop_path']}}" class="card-img-top" alt="...">
+        <div class="card-body">
+
+          <h5 class="card-text">Gênero: {{movie['genre_ids']}}  </h5>
+          <h6 class="card-text">{{movie['release_date']|date:'dd/MM/yyyy'}}</h6>
+          <p class="card-text" id="bsinopse">{{movie['overview']}}</p>
+          <a href="#" class="btn btn-warning btn-lg btn-block">Ler Mais</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--PAGINAÇÃO-->
+  <nav aria-label="Page navigation example" style="padding-bottom: 2rem;">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Proximo</a>
+      </li>
+    </ul>
+  </nav>
 </div>
 
 <!----MAIS POPULARES---->
@@ -90,50 +90,65 @@
   <h1>POPULARES</h1>
 
   <!--AREA DOS CARDS POPULARES-->
-  <div class="row resultadopopulares" >
-    <div class="col col-sm-12 col-md-3 col-lg-3" *ngFor="let movie of resMovies['results']">
-      <div class="card cardpopulares" >
+  <div class="row resultadopopulares">
+    <div class="col col-sm-12 col-md-4 col-lg-3" *ngFor="let movie of resMovies['results']">
+      <div class="card cardpopulares">
         <img src="https://image.tmdb.org/t/p/w500{{movie['backdrop_path']}}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{movie['title']}}</h5>
           <h6 class="card-text">{{movie['release_date']|date:'dd/MM/yyyy'}}</h6>
-          <p class="card-text" id="psinopse" style="height: 20rem;">{{movie['overview']}}</p>
-          <a href="#" class="btn btn-warning btn-lg btn-block">Ler Mais</a>
+          <p class="card-text" id="psinopse">{{movie['overview']}}</p>
+          <a id="meuInput"  class="btn btn-warning btn-lg btn-block" data-toggle="modal"
+          data-target=".bd-example-modal-lg" (click)="getMovieDetails(movie['id'])" >Ler Mais</a>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+
+
 <!--MODAL DE LER MAIS-->
 
-<div class="modal" tabindex="-1" role="dialog">
+<div id="myModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">TITULO DO FILME</h5>
+        <h5 class="modal-title">{{resDetalhes["title"]}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div row>
-          <div col-3 col-md-3 col-lg-3 col-sm-3>
-            <img src="/assets/movie.jpg" class="card-img-top" alt="...">
-          </div>
-          <div col-9 col-md-9 col-lg-9 col-sm-9>
 
-            <h5>Data de Lançamento</h5>
-            <h5>Gêneros:</h5>
-            <p>Sinopse</p>
-            <h6>Avaliação no The Movie BD</h6>
-
+    <div class="container">
+      <div class="row">
+        <div class="col col-sm-3 col-md-3 col-lg-3">
+          <img src="/assets/movie.jpg" class="card-img-top" alt="...">
+        </div>
+        <div class="col col-sm-9 col-md-9 col-lg-9">
+          <h4>Titulo Original: {{resDetalhes["original_title"]}} </h4>
+          <h5>Data de Lançamento: {{resDetalhes['release_date']|date:'dd/MM/yyyy'}}</h5>
+          <h5>Gêneros: {{resDetalhes['genre_ids']}}</h5>
+          <p>{{resDetalhes['overview']}}</p>
+          <h6>Elenco: </h6>
+          <h6>Direção: </h6>
+          <h6>Avaliação no The Movie BD</h6>
+          <div class="row">
+            <div class="col col-sm-6 col-md-6 col-lg">
+              <p>Popularidade:</p>
+            </div>
+            <div class="col col-sm-6 col-md-6 col-lg">
+              <p>Votos:</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Fechar</button>
-      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-warning" data-dismiss="modal">Fechar</button>
+    </div>
+
     </div>
   </div>
 </div>
