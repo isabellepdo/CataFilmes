@@ -13,9 +13,6 @@
 }
 
 
-
-
-
 /*BACKGROUND*/
 .bodysite{
   background-color:rgba(52,58,62,0.8);
@@ -77,17 +74,30 @@
   margin-top: 2rem;
   align-items: center !important;
   align-self: center;
+
 }
 
 .cardbusca{
   align-items: center;
   align-self: center;
   margin-bottom: 1rem;
+  height: 50rem;
+}
+
+.generostags{
+  height: 5rem;
 }
 
 #bsinopse{
   overflow:auto;
   height: 15rem;
+}
+
+.taggenerobusca{
+  background-color: rgba(103, 100, 108, 0.8);
+  margin: 0.2rem;
+  color: white;
+  padding: 0.2rem;
 }
 
 /*POPULARES*/
@@ -157,6 +167,33 @@
   font-size: 18px;
 }
 
+.taggenero{
+  background-color: rgba(175,139,16, 0.95);
+  text-align: center;
+  color: #FFF;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.elenco {
+  white-space: nowrap;
+  display: inline-block;
+  min-height: 220px;
+}
+
+.scrolling-elenco {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  margin-top: 1rem;
+
+  .card {
+    display: inline-block;
+    margin: 1rem;
+  }
+}
+
+
 /* RESOLUÇÃO CELULAR */
 @media (max-width: 700px) {
 
@@ -170,6 +207,10 @@
 .cardpopulares{
   width: 20rem;
   margin-bottom: 0.8rem;
+}
+
+.pesquisa.col-auto{
+  display: none;
 }
 
 /*FOOTER*/
@@ -189,6 +230,18 @@
 .redessociais{
   text-align: center;
   align-items: center;
+}
+
+.avaliacoes p{
+  font-size: 12px;
+}
+
+.avaliacoes h4{
+  font-size: 18px;
+}
+
+.avaliacoes h5{
+  font-size: 16px;
 }
 
 }
