@@ -107,6 +107,7 @@ export class CatalogoComponent implements OnInit {
   }
 
   multiFilter(array, filters) {
+    console.log(array,filters)
     const filterKeys = Object.keys(filters);
     return array.filter(item => {
       return filterKeys.every(key => {
@@ -117,13 +118,14 @@ export class CatalogoComponent implements OnInit {
         if (key === "descricao") {
           let filtro = filters[key].toLowerCase();
           let titulo = item["title"].toLowerCase();
-
           if (titulo.match(filtro) != null) {
             return true;
           }
+          return false
         }
         if (key === "idGenero") {
-          let find = item["genre_ids"].find(item => item == filters[key]);
+          let find = item["genre_ids"].find(item => item.id == filters[key]);
+          console.log(find,filters[key])
           if (typeof find != "undefined") {
             return true;
           }
