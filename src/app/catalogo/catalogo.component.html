@@ -12,6 +12,7 @@
             <input class="form-control form-control-lg form-control-borderless" formControlName="descricao" type="search"
               placeholder="Use palavras chaves para buscar filmes">
           </div>
+
           <div class="col-auto">
             <button class="btn btn-lg btn-secondary" type="submit" (click)="buscarFilmes()">Buscar</button>
           </div>
@@ -21,25 +22,11 @@
       <div class="form-row" style="margin-top: 1rem;">
         <div class="form-group col-6 col-md-6">
           <label for="exampleFormControlSelect1" style="color: #fff;">Gênero do Filme</label>
-          <select class="form-control" id="exampleFormControlSelect1" formControlName="id" >
-            <option>--TODOS--</option>
-            <option>Ação</option>
-            <option>Animação</option>
-            <option>Aventura</option>
-            <option>Comédia</option>
-            <option>Dança</option>
-            <option>Documentário</option>
-            <option>Drama</option>
-            <option>Espionagem</option>
-            <option>Faroeste</option>
-            <option>Fantasia</option>
-            <option>Ficção Científica</option>
-            <option>Filmes de Guerra</option>
-            <option>Musical</option>
-            <option>Policial</option>
-            <option>Romance</option>
-            <option>Suspense</option>
-            <option>Terror</option>
+          <select
+            id="generoSelect"
+            class="form-control"
+            [(ngModel)]="resGeneros" (change)="setGenero($event)">
+            <option *ngFor="let genero of resGeneros" [value]="genero.id">{{ genero.name }}</option>
           </select>
         </div>
 
@@ -54,17 +41,30 @@
   <!--{{filterForm.value|json}}-->
   <!--AREA DOS CARDS BUSCA-->
   <div class="row resultadobusca">
-    <div class="cardbusca col col-sm-4 col-md-4 col-lg-4" *ngFor="let movie of resMovies['results']">
+    <div class="cardbusca col col-sm-4 col-md-4 col-lg-4" *ngFor="let movie of
+      copiaMovies">
       <div class="card" style="width: 22rem;">
         <h4 class="card-title" id="ptitulo">{{movie['title']}}</h4>
-        <img src="https://image.tmdb.org/t/p/w500{{movie['backdrop_path']}}" class="card-img-top" alt="...">
+        <img src="https://image.tmdb.org/t/p/w500{{movie['backdrop_path']}}"
+          class="card-img-top" alt="...">
         <div class="card-body">
 
-          <h5 class="card-text">Gênero: {{movie['genre_ids']}}  </h5>
           <h6 class="card-text">{{movie['release_date']|date:'dd/MM/yyyy'}}</h6>
           <p class="card-text" id="bsinopse">{{movie['overview']}}</p>
-          <a href="#" class="btn btn-warning btn-lg btn-block" data-toggle="modal"
-          data-target=".bd-example-modal-lg" (click)="getMovieDetails(movie['id'])">Ler Mais</a>
+
+          <h5 class="card-text" >Gêneros:</h5>
+          <div class="row container generostags" >
+            <div *ngFor="let genero of movie['genre_ids']">
+              <div class="taggenerobusca">
+                {{genero['name']}}
+              </div>
+            </div>
+          </div>
+
+          <a href="#" class="btn btn-warning btn-lg btn-block"
+            data-toggle="modal"
+            data-target=".bd-example-modal-lg"
+            (click)="getMovieDetails(movie['id'])">Ler Mais</a>
         </div>
       </div>
     </div>
@@ -92,7 +92,7 @@
 
   <!--AREA DOS CARDS POPULARES-->
   <div class="row resultadopopulares">
-    <div class="col col-sm-12 col-md-4 col-lg-3" *ngFor="let movie of resMovies['results']">
+    <div class="col col-sm-12 col-md-4 col-lg-3" *ngFor="let movie of resPopularMovies['results']">
       <div class="card cardpopulares">
         <img src="https://image.tmdb.org/t/p/w500{{movie['backdrop_path']}}" class="card-img-top" alt="...">
         <div class="card-body">
@@ -121,77 +121,102 @@
         </button>
       </div>
 
-    <div class="container" style="margin-top: 1rem;">
-      <div class="row">
-        <div class="col col-sm-5 col-md-5 col-lg-5">
-          <img src="https://image.tmdb.org/t/p/w500{{resDetalhes['poster_path']}}" class="card-img-top" alt="...">
-        </div>
-        <div class="col col-sm-7 col-md-7 col-lg-7">
-
-          <h4>Titulo Original: {{resDetalhes["original_title"]}} </h4>
-          <h5>Data de Lançamento: {{resDetalhes['release_date']|date:'dd/MM/yyyy'}}</h5>
-          <h5>Gêneros: {{resDetalhes['genre_ids']}}</h5>
-
-
-          <h5>Sinopse:</h5>
-          <p>{{resDetalhes['overview']}}</p>
-
-
-
-        </div>
-
-        <!--DETALHES TECNICOS-->
-        <div class="container" style="padding: 1rem;">
-          <h6>Elenco:</h6>
-          <div class="row container" >
-            <div *ngFor="let movie of resDetalhes['elenco']">
-              {{movie['name']}},
-            </div>
-          </div>
-        <h6 style="margin-top: 1rem;" >Equipe técnica:</h6>
-          <div class="row container" >
-            <div *ngFor="let movie of resDetalhes['equipeTecnica']">
-              {{movie['name']}},
-            </div>
-        </div>
-
-        <div class="avaliacoes">
-          <h5><b>Avaliação no The Movie DB</b></h5>
+        <div class="container" style="margin-top: 1rem;">
           <div class="row">
-            <div class="col col-sm-4 col-md-4 col-lg-4">
-              <p><b>Popularidade</b></p>
+            <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+              <img src="https://image.tmdb.org/t/p/w500{{resDetalhes['poster_path']}}" class="card-img-top" alt="...">
             </div>
-            <div class="col col-sm-4 col-md-4 col-lg-4">
-              <p><b>Nota</b></p>
+            <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+
+              <h4>Titulo Original: {{resDetalhes["original_title"]}} </h4>
+              <h5>Data de Lançamento: {{resDetalhes['release_date']|date:'dd/MM/yyyy'}}</h5>
+              <h5>Gêneros:
+                <div class="row container" >
+                  <div *ngFor="let genero of resDetalhes['genres']">
+                    <div class="taggenero">
+                      {{genero['name']}}
+                    </div>
+                  </div>
+                </div>
+
+              </h5>
+
+
+              <h5>Sinopse:</h5>
+              <p>{{resDetalhes['overview']}}</p>
+
+
+
             </div>
-            <div class="col col-sm-4 col-md-4 col-lg-4">
-              <p><b>Total de votos</b></p>
+
+            <div class="container-fluid scrolling-elenco">
+              <h6>Elenco:</h6>
+              <div class="row flex-row flex-nowrap " >
+                <div *ngFor="let movie of resDetalhes['elenco']">
+                  <div class="card" style="width: 13rem;">
+                    <img src="https://image.tmdb.org/t/p/w500{{movie['profile_path']}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{movie['name']}}</h5>
+                      <p class="card-text" style="text-align: center;">{{movie['character']}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <div class="container-fluid scrolling-elenco">
+              <h6 style="margin-top: 1rem;" >Equipe técnica:</h6>
+              <div class="row flex-row flex-nowrap " >
+                <div *ngFor="let movie of resDetalhes['equipeTecnica']">
+                  <div class="card" style="width: 13rem;">
+                    <img src="https://image.tmdb.org/t/p/w500{{movie['profile_path']}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{movie['name']}}</h5>
+                      <p class="card-text" style="text-align: center;">{{movie['job']}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
           </div>
-          <div class="row">
-            <div class="col col-sm-4 col-md-4 col-lg-4">
-              <p>{{resDetalhes['popularity']}}</p>
+
+            <div class="avaliacoes">
+              <h5><b>Avaliação no The Movie DB</b></h5>
+              <div class="row">
+                <div class="col col-sm-4 col-md-4 col-lg-4">
+                  <p><b>Popularidade</b></p>
+                </div>
+                <div class="col col-sm-4 col-md-4 col-lg-4">
+                  <p><b>Nota</b></p>
+                </div>
+                <div class="col col-sm-4 col-md-4 col-lg-4">
+                  <p><b>Total de votos</b></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-sm-4 col-md-4 col-lg-4">
+                  <p>{{resDetalhes['popularity']}}</p>
+                </div>
+                <div class="col col-sm-4 col-md-4 col-lg-4">
+                  <p>{{resDetalhes['vote_average']}}</p>
+                </div>
+                <div class="col col-sm-4 col-md-4 col-lg-4">
+                  <p>{{resDetalhes['vote_count']}}</p>
+                </div>
+              </div>
             </div>
-            <div class="col col-sm-4 col-md-4 col-lg-4">
-              <p>{{resDetalhes['vote_average']}}</p>
-            </div>
-            <div class="col col-sm-4 col-md-4 col-lg-4">
-              <p>{{resDetalhes['vote_count']}}</p>
-            </div>
+
           </div>
+
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Fechar</button>
         </div>
-
-      </div>
-
-
-
-    </div>
-
-
-
-    <div class="modal-footer">
-      <button type="button" class="btn btn-warning" data-dismiss="modal">Fechar</button>
-    </div>
 
     </div>
   </div>
